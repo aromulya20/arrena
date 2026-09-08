@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Langganan - Rental Arena</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-lockup"><div class="brand-mark">XP</div><div><p class="eyebrow">CONTROL ROOM</p><h1>Rental Arena <span>/ Billing</span></h1></div></div>
+    <nav><a href="index.html">Dashboard</a><a href="report.html">Laporan</a><a href="members.html" class="active">Member PS</a><a href="admin-dashboard.html">Dashboard Admin</a><button id="btn-logout" class="nav-logout">Keluar</button></nav>
+  </header>
+  <main>
+    <section class="report-heading"><div><p class="eyebrow accent-text">MEMBERSHIP MANAGEMENT</p><h2>Langganan pelanggan</h2><p class="hero-copy">Pantau user aktif dan kelola masa berlaku paket mereka.</p></div><button id="btn-open-member" class="btn-primary">＋ Tambah Langganan</button></section>
+    <section id="member-stats" class="dashboard-stats"></section>
+    <section class="report-toolbar"><strong>Daftar pelanggan</strong><span id="member-count" class="unit-count"></span><input id="member-search" class="unit-search" type="search" placeholder="Cari nama, telepon, atau paket..." aria-label="Cari pelanggan" /></section>
+    <div class="member-table-wrap"><table class="report-table member-table"><thead><tr><th>Pelanggan</th><th>Kontak</th><th>Paket</th><th>Periode</th><th>Harga</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="member-body"></tbody></table></div>
+  </main>
+  <div id="member-modal" class="modal hidden"><div class="modal-box"><p class="eyebrow accent-text">NEW MEMBERSHIP</p><h2>Tambah langganan</h2><label for="member-name">Nama pelanggan</label><input id="member-name" type="text" placeholder="Nama lengkap" /><label for="member-phone">Nomor telepon</label><input id="member-phone" type="tel" placeholder="08xxxxxxxxxx" /><label for="member-email">Email</label><input id="member-email" type="email" placeholder="opsional" /><label for="member-package">Nama paket</label><input id="member-package" type="text" value="Member Arena" /><label for="member-start">Mulai</label><input id="member-start" type="date" /><label for="member-end">Berakhir</label><input id="member-end" type="date" /><label for="member-price">Harga paket</label><input id="member-price" type="number" min="0" step="500" value="0" /><div class="modal-actions"><button id="btn-cancel-member" class="btn-secondary">Batal</button><button id="btn-save-member" class="btn-primary">Simpan Langganan</button></div></div></div>
+  <script src="members.js"></script>
+  <script src="access-ui.js"></script>
+</body>
+</html>

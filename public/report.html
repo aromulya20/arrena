@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rental PS - Laporan</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🎮 Rental PS - Laporan</h1>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="report.html" class="active">Laporan</a>
+      <a href="members.html">Member PS</a>
+      <a href="admin-dashboard.html">Dashboard Admin</a>
+      <button id="btn-logout" class="nav-logout">Keluar</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="report-heading">
+      <div><p class="eyebrow accent-text">FINANCIAL OVERVIEW</p><h2>Laporan keuangan</h2><p class="hero-copy">Ringkasan transaksi dan performa rental hari ini.</p></div>
+      <button id="btn-export" class="btn-secondary">↓ Export CSV</button>
+    </section>
+    <div class="summary-cards" id="summary-cards"></div>
+
+    <section class="payment-breakdown" id="payment-breakdown"></section>
+
+    <section class="monthly-report">
+      <div class="monthly-heading">
+        <div><p class="eyebrow accent-text">MONTHLY REVENUE</p><h3>Pendapatan harian</h3></div>
+        <input id="report-month" class="month-picker" type="month" aria-label="Pilih bulan laporan" />
+      </div>
+      <div id="monthly-summary" class="monthly-summary"></div>
+      <div id="daily-revenue" class="daily-revenue"></div>
+    </section>
+
+    <section class="report-toolbar">
+      <strong>Riwayat transaksi</strong>
+      <span id="report-count" class="unit-count"></span>
+      <input id="report-search" class="unit-search" type="search" placeholder="Cari unit atau pelanggan..." aria-label="Cari laporan" />
+      <select id="report-method" class="report-select" aria-label="Filter metode pembayaran">
+        <option value="all">Semua metode</option>
+        <option value="tunai">Tunai</option>
+        <option value="qris">QRIS</option>
+        <option value="debit">Debit</option>
+        <option value="transfer">Transfer</option>
+      </select>
+    </section>
+
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>Waktu</th>
+          <th>Unit</th>
+          <th>Pelanggan</th>
+          <th>Durasi (menit)</th>
+          <th>Jumlah Bayar</th>
+          <th>Dibayar</th>
+          <th>Metode</th>
+          <th>Kembalian</th>
+          <th>Status Sesi</th>
+        </tr>
+      </thead>
+      <tbody id="report-body"></tbody>
+    </table>
+  </main>
+
+  <script src="report.js?v=monthly-revenue-20260908"></script>
+  <script src="session-ui.js"></script>
+  <script src="access-ui.js"></script>
+</body>
+</html>

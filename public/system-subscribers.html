@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard Admin - Info Langganan Sistem</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-lockup"><div class="brand-mark">XP</div><div><p class="eyebrow">CONTROL ROOM</p><h1>Rental Arena <span>/ Billing</span></h1></div></div>
+    <nav><a href="index.html">Dashboard</a><a href="report.html">Laporan</a><a href="members.html">Member PS</a><a href="admin-dashboard.html" class="active">Dashboard Admin</a><button id="btn-logout" class="nav-logout">Keluar</button></nav>
+  </header>
+  <main>
+    <section class="report-heading"><div><p class="eyebrow accent-text">ADMIN DASHBOARD</p><h2>Info pelanggan sistem</h2><p class="hero-copy">Kelola status paket, periode, harga, dan akses setiap usaha yang berlangganan sistem Anda.</p></div><button id="btn-open-subscriber" class="btn-primary">＋ Tambah Pelanggan</button></section>
+    <section id="subscriber-stats" class="dashboard-stats"></section>
+    <section class="report-toolbar"><strong>Daftar informasi langganan</strong><span id="subscriber-count" class="unit-count"></span><input id="subscriber-search" class="unit-search" type="search" placeholder="Cari usaha, pemilik, atau username..." aria-label="Cari informasi langganan" /></section>
+    <div class="member-table-wrap"><table class="report-table member-table"><thead><tr><th>Usaha</th><th>Pemilik & Kontak</th><th>Akun</th><th>Paket</th><th>Periode</th><th>Harga</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="subscriber-body"></tbody></table></div>
+  </main>
+  <div id="subscriber-modal" class="modal hidden"><div class="modal-box"><p id="subscriber-modal-kicker" class="eyebrow accent-text">NEW SYSTEM SUBSCRIBER</p><h2 id="subscriber-modal-title">Tambah pelanggan sistem</h2><label for="subscriber-business">Nama usaha</label><input id="subscriber-business" type="text" placeholder="Contoh: Arena Game 88" /><label for="subscriber-owner">Nama pemilik</label><input id="subscriber-owner" type="text" placeholder="Nama pemilik usaha" /><label for="subscriber-phone">Nomor telepon</label><input id="subscriber-phone" type="tel" placeholder="08xxxxxxxxxx" /><label for="subscriber-email">Email</label><input id="subscriber-email" type="email" placeholder="email@usaha.com" /><label for="subscriber-username">Username akses</label><input id="subscriber-username" type="text" autocomplete="off" placeholder="username pelanggan" /><label for="subscriber-password">Password <span id="subscriber-password-hint">awal</span></label><input id="subscriber-password" type="password" autocomplete="new-password" placeholder="Kosongkan jika tidak diubah" /><label for="subscriber-package">Paket</label><select id="subscriber-package"><option value="Basic">Basic</option><option value="Pro">Pro</option><option value="Enterprise">Enterprise</option></select><label for="subscriber-start">Mulai berlangganan</label><input id="subscriber-start" type="date" /><label for="subscriber-end">Berakhir</label><input id="subscriber-end" type="date" /><label for="subscriber-price">Harga langganan</label><input id="subscriber-price" type="number" min="0" step="1000" value="0" /><div class="modal-actions"><button id="btn-cancel-subscriber" class="btn-secondary">Batal</button><button id="btn-save-subscriber" class="btn-primary">Simpan Perubahan</button></div></div></div>
+  <script src="system-subscribers.js"></script>
+</body>
+</html>

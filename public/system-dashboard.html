@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard Langganan - Rental Arena</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-lockup"><div class="brand-mark">XP</div><div><p class="eyebrow">RENTAL ARENA</p><h1>Customer <span>/ Portal</span></h1></div></div>
+    <nav><a href="index.html">Dashboard PS</a><a href="report.html">Laporan</a><a href="members.html" class="active">Info Langganan</a><span id="subscriber-navbar-label" class="portal-label">Pelanggan Sistem</span><button id="btn-logout" class="nav-logout">Keluar</button></nav>
+  </header>
+  <main>
+    <section class="report-heading"><div><p class="eyebrow accent-text">SUBSCRIPTION PORTAL</p><h2 id="portal-business">Dashboard usaha</h2><p class="hero-copy">Pantau status akses langganan sistem Anda.</p></div><span id="portal-status" class="status-badge status-kosong">AKTIF</span></section>
+    <section id="portal-stats" class="dashboard-stats"></section>
+    <section class="portal-grid"><article class="portal-card"><p class="eyebrow accent-text">PAKET ANDA</p><h3 id="portal-package">-</h3><div class="portal-detail"><span>Masa berlaku</span><strong id="portal-period">-</strong></div><div class="portal-detail"><span>Harga langganan</span><strong id="portal-price">-</strong></div></article><article class="portal-card"><p class="eyebrow accent-text">DATA AKUN</p><h3 id="portal-owner">-</h3><div class="portal-detail"><span>Username</span><strong id="portal-username">-</strong></div><div class="portal-detail"><span>Email / Telepon</span><strong id="portal-contact">-</strong></div></article><article class="portal-card support-card"><p class="eyebrow accent-text">BUTUH BANTUAN?</p><h3>Hubungi admin</h3><p class="hero-copy">Untuk perubahan paket, pembayaran, atau kendala penggunaan sistem, hubungi pengelola Rental Arena.</p></article></section>
+  </main>
+  <script src="system-dashboard.js"></script>
+  <script src="access-ui.js"></script>
+</body>
+</html>

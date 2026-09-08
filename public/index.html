@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rental PS - Dashboard Billing</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-lockup">
+      <div class="brand-mark">XP</div>
+      <div><p class="eyebrow">CONTROL ROOM</p><h1>Rental Arena <span>/ Billing</span></h1></div>
+    </div>
+    <nav>
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="report.html">Laporan</a>
+      <a href="members.html">Member PS</a>
+      <a href="admin-dashboard.html">Dashboard Admin</a>
+      <button id="btn-logout" class="nav-logout">Keluar</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-row">
+      <div><p class="eyebrow accent-text">LIVE OPERATIONS</p><h2>Kelola arena permainan</h2><p class="hero-copy">Pantau waktu bermain, status unit, dan transaksi aktif dalam satu layar.</p></div>
+      <div class="hero-actions"><div class="live-indicator"><span></span> Live sync</div><div class="hero-buttons"><button id="btn-open-pos" class="btn-primary add-device-button">＋ POS Barang</button><button id="btn-add-device" class="btn-secondary add-device-button">＋ Device</button></div></div>
+    </section>
+    <section class="dashboard-stats" id="dashboard-stats" aria-label="Ringkasan dashboard"></section>
+    <section class="toolbar" aria-label="Filter unit">
+      <div class="toolbar-title"><span class="toolbar-icon">◈</span><strong>Unit permainan</strong><span id="unit-count" class="unit-count"></span></div>
+      <div class="filter-group">
+        <button class="filter-button active" data-filter="all">Semua</button>
+        <button class="filter-button" data-filter="PS">PlayStation</button>
+        <button class="filter-button" data-filter="LAN">LAN</button>
+        <button class="filter-button" data-filter="dipakai">Sedang main</button>
+      </div>
+      <input id="unit-search" class="unit-search" type="search" placeholder="Cari unit atau pelanggan..." aria-label="Cari unit atau pelanggan" />
+    </section>
+    <div id="units-grid" class="units-grid"></div>
+  </main>
+
+  <!-- Modal: Mulai Sewa -->
+  <div id="modal-start" class="modal hidden">
+    <div class="modal-box">
+      <h2>Mulai Sewa - <span id="modal-unit-name"></span></h2>
+      <label>Nama Pelanggan</label>
+      <input type="text" id="input-nama" placeholder="Nama pelanggan (opsional)" />
+
+      <label>Durasi (menit)</label>
+      <div class="mode-buttons">
+        <button type="button" class="mode-button active" data-mode="countdown">Countdown</button>
+        <button type="button" class="mode-button" data-mode="stopwatch">Stopwatch manual</button>
+      </div>
+      <div class="duration-buttons">
+        <button data-menit="30">30</button>
+        <button data-menit="60">60</button>
+        <button data-menit="120">120</button>
+        <button data-menit="180">180</button>
+      </div>
+      <input type="number" id="input-durasi" placeholder="Atau isi manual (menit)" min="1" />
+
+      <p id="preview-biaya" class="preview-biaya"></p>
+
+      <div class="modal-actions">
+        <button id="btn-cancel-start" class="btn-secondary">Batal</button>
+        <button id="btn-confirm-start" class="btn-primary">Mulai Sewa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Extend -->
+  <div id="modal-extend" class="modal hidden">
+    <div class="modal-box">
+      <h2>Tambah Waktu - <span id="extend-unit-name"></span></h2>
+      <label>Tambahan (menit)</label>
+      <div class="duration-buttons">
+        <button data-menit="15">15</button>
+        <button data-menit="30">30</button>
+        <button data-menit="60">60</button>
+      </div>
+      <input type="number" id="input-extend-durasi" placeholder="Atau isi manual (menit)" />
+      <div class="modal-actions">
+        <button id="btn-cancel-extend" class="btn-secondary">Batal</button>
+        <button id="btn-confirm-extend" class="btn-primary">Tambah Waktu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Kasir sesi manual -->
+  <div id="modal-cashier" class="modal hidden">
+    <div class="modal-box cashier-box">
+      <p class="eyebrow accent-text">CHECKOUT SESI PS</p>
+      <h2>Kasir - <span id="cashier-unit-name"></span></h2>
+      <div class="cashier-total"><span>Total tagihan</span><strong id="cashier-total"></strong></div>
+      <div class="cashier-detail"><span>Durasi bermain</span><strong id="cashier-duration"></strong></div>
+      <div class="cashier-products">
+        <div class="pos-add-row"><select id="cashier-product" aria-label="Tambah snack atau minuman"></select><input type="number" id="cashier-quantity" min="1" value="1" aria-label="Jumlah barang" /><button id="btn-add-cashier-item" class="btn-primary">Tambah</button></div>
+        <div id="cashier-cart" class="pos-cart"><span class="empty-note">Belum ada snack/minuman</span></div>
+        <div class="cashier-detail"><span>Total snack/minuman</span><strong id="cashier-items-total">Rp0</strong></div>
+      </div>
+      <label for="cashier-method">Metode pembayaran</label>
+      <select id="cashier-method">
+        <option value="tunai">Tunai</option>
+        <option value="qris">QRIS</option>
+        <option value="debit">Debit</option>
+        <option value="transfer">Transfer</option>
+      </select>
+      <label for="cashier-paid">Nominal dibayar</label>
+      <input type="number" id="cashier-paid" min="0" step="500" placeholder="Masukkan nominal pembayaran" />
+      <p id="cashier-change" class="cashier-change"></p>
+      <div class="modal-actions">
+        <button id="btn-cancel-cashier" class="btn-secondary">Batal</button>
+        <button id="btn-confirm-cashier" class="btn-primary">Selesaikan & Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Tambah device -->
+  <div id="modal-device" class="modal hidden">
+    <div class="modal-box">
+      <p class="eyebrow accent-text">DEVICE MANAGEMENT</p>
+      <h2>Tambah Device</h2>
+      <label for="device-name">Nama device</label>
+      <input type="text" id="device-name" placeholder="Contoh: PS 4 atau LAN 1" />
+      <label for="device-type">Tipe device</label>
+      <select id="device-type">
+        <option value="PS5">PlayStation 5</option>
+        <option value="PS4">PlayStation 4</option>
+        <option value="LAN">LAN Gaming</option>
+      </select>
+      <label for="device-rate">Tarif per jam</label>
+      <input type="number" id="device-rate" min="1" step="500" value="5000" placeholder="Contoh: 5000" />
+      <div class="modal-actions">
+        <button id="btn-cancel-device" class="btn-secondary">Batal</button>
+        <button id="btn-confirm-device" class="btn-primary">Simpan Device</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: POS barang -->
+  <div id="modal-pos" class="modal hidden">
+    <div class="modal-box pos-box">
+      <div class="pos-heading"><div><p class="eyebrow accent-text">POINT OF SALE</p><h2>Penjualan barang</h2></div><button id="btn-cancel-pos" class="icon-close" aria-label="Tutup POS">×</button></div>
+      <div class="pos-add-row">
+        <select id="pos-product" aria-label="Pilih produk"></select>
+        <input type="number" id="pos-quantity" min="1" value="1" aria-label="Jumlah produk" />
+        <button id="btn-add-cart" class="btn-primary">Tambah</button>
+      </div>
+      <div id="pos-cart" class="pos-cart"><span class="empty-note">Belum ada barang di keranjang</span></div>
+      <div class="pos-total"><span>Total</span><strong id="pos-total-value">Rp0</strong></div>
+      <div class="pos-new-product">
+        <strong>Tambah menu baru</strong>
+        <div class="pos-new-product-row"><input id="new-product-name" type="text" placeholder="Nama snack/minuman" /><select id="new-product-category"><option value="snack">Snack</option><option value="minuman">Minuman</option><option value="lainnya">Lainnya</option></select><input id="new-product-price" type="number" min="1" placeholder="Harga" /><button id="btn-save-product" class="btn-secondary">Simpan Menu</button></div>
+        <div id="pos-product-list" class="pos-product-list"></div>
+      </div>
+      <label for="pos-method">Metode pembayaran</label>
+      <select id="pos-method"><option value="tunai">Tunai</option><option value="qris">QRIS</option><option value="debit">Debit</option><option value="transfer">Transfer</option></select>
+      <label for="pos-paid">Nominal dibayar</label>
+      <input type="number" id="pos-paid" min="0" step="500" placeholder="Otomatis sesuai total" />
+      <p id="pos-change" class="cashier-change"></p>
+      <div class="modal-actions"><button id="btn-cancel-pos-bottom" class="btn-secondary">Batal</button><button id="btn-confirm-pos" class="btn-primary">Bayar & Simpan</button></div>
+    </div>
+  </div>
+
+  <script src="app.js?v=20260908-pos-1"></script>
+  <script src="session-ui.js"></script>
+  <script src="access-ui.js"></script>
+</body>
+</html>

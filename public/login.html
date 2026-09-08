@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Login - Rental Arena</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-page">
+  <main class="login-shell">
+    <section class="login-panel">
+      <div class="brand-lockup"><div class="brand-mark">XP</div><div><p class="eyebrow">CONTROL ROOM</p><h1>Rental Arena <span>/ Billing</span></h1></div></div>
+      <p class="eyebrow accent-text login-kicker">STAFF ACCESS</p>
+      <h2>Masuk ke arena</h2>
+      <p class="hero-copy">Kelola billing, POS, laporan, dan langganan pelanggan.</p>
+      <form id="login-form" class="login-form">
+        <label for="login-username">Username</label>
+        <input id="login-username" type="text" autocomplete="username" required placeholder="Masukkan username" />
+        <label for="login-password">Password</label>
+        <input id="login-password" type="password" autocomplete="current-password" required placeholder="Masukkan password" />
+        <p id="login-error" class="form-error"></p>
+        <button class="btn-primary" type="submit">Masuk Dashboard</button>
+      </form>
+      <small class="login-hint">Akun awal: admin / admin123</small>
+    </section>
+  </main>
+  <script src="login.js"></script>
+</body>
+</html>
